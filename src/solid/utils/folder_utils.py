@@ -45,7 +45,7 @@ def _parse_folder_response(text, url):
         item.url = item_url
         item.itemType = 'Container' if is_container(obj) else 'Resource'
         item.size = next(g.objects(obj, POSIXSTAT.size)).value
-        item.date = next(g.objects(obj, POSIXSTAT.mtime)).value
+        item.date = int(next(g.objects(obj, POSIXSTAT.mtime)).value)
 
         cat = folders if is_container(obj) else files
         cat.append(item)
