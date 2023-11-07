@@ -5,6 +5,7 @@ from rdflib import Namespace, Graph, URIRef, RDF
 from solid.utils.api_util import get_item_name, get_parent_url
 
 LDP = Namespace("http://www.w3.org/ns/ldp#")
+POSIXSTAT = Namespace("http://www.w3.org/ns/posix/stat#")
 container_types = [URIRef('http://www.w3.org/ns/ldp#Container'), URIRef('http://www.w3.org/ns/ldp#BasicContainer')]
 
 
@@ -43,6 +44,8 @@ def _parse_folder_response(text, url):
         item.name = get_item_name(item_url)
         item.url = item_url
         item.itemType = 'Container' if is_container(obj) else 'Resource'
+        item.size = next(g.objects(obj, POSIXSTAT.size))
+        item.date = next(g.objects(obj, POSIXSTAT.size))
 
         cat = folders if is_container(obj) else files
         cat.append(item)

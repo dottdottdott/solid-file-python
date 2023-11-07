@@ -60,6 +60,8 @@ class Item:
         self.parent = None
         self.itemType = None  # "Container" | "Resource"
         self.links: Optional[Links] = None
+        self.date = None
+        self.size = None
 
 
 class FolderData:
